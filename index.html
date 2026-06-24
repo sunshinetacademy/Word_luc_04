@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المحاضرة الرابعة — الصور والمخططات في البحوث القانونية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:#f8f4ed;--cream-dark:#ede8de;--ink:#1c1a17;--ink-mid:#4a4540;
+  --ink-soft:#7a7268;--rule:#cfc8ba;--gold:#9c7c2e;--gold-light:#c9a84c;
+  --gold-bg:rgba(156,124,46,0.08);--red:#8b2020;--red-bg:#fdf0f0;
+  --green:#1e5c3a;--green-bg:#edf5f0;--blue:#1a3a6b;--blue-bg:#eef2f9;
+  --purple:#5b2d8e;--purple-bg:#f3eefb;
+  --code-bg:#1c1a17;--code-txt:#e8e2d8;
+}
+*,*::before,*::after{box-sizing:border-box;}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Cairo',sans-serif;font-size:16px;line-height:1.85;}
+.page{max-width:960px;margin:0 auto;padding:0 24px 100px;}
+
+/* COVER */
+.cover{background:var(--ink);color:var(--cream);padding:64px 48px 48px;margin:0 -24px 60px;position:relative;overflow:hidden;}
+.cover::before{content:'🖼';position:absolute;left:-20px;top:-10px;font-size:200px;opacity:0.05;line-height:1;}
+.cover .meta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);margin-bottom:20px;}
+.cover h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,50px);font-weight:900;margin:0 0 12px;line-height:1.2;color:#fff;}
+.cover .sub{color:rgba(248,244,237,0.65);font-size:17px;margin:0 0 36px;}
+.cover-pills{display:flex;flex-wrap:wrap;gap:10px;}
+.pill{border:1px solid rgba(201,168,76,0.4);color:var(--gold-light);font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 14px;border-radius:20px;letter-spacing:1px;}
+
+/* PROGRESS */
+.progress-strip{display:flex;gap:0;margin-bottom:56px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;font-family:'JetBrains Mono',monospace;font-size:11px;}
+.ps-item{flex:1;padding:10px 12px;text-align:center;color:var(--ink-soft);border-left:1px solid var(--rule);background:#fff;}
+.ps-item:last-child{border-left:none;}
+.ps-item.done{background:var(--green-bg);color:var(--green);}
+.ps-item.active{background:var(--ink);color:var(--gold-light);font-weight:700;}
+.ps-item .ps-num{display:block;font-size:16px;font-weight:700;margin-bottom:2px;}
+
+/* SECTIONS */
+section{margin-bottom:64px;}
+.sec-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;padding-bottom:12px;border-bottom:2.5px solid var(--ink);}
+.sec-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--gold);border:2px solid var(--gold);border-radius:4px;padding:4px 8px;white-space:nowrap;margin-top:4px;}
+.sec-head h2{margin:0;font-size:clamp(20px,3vw,28px);font-weight:900;line-height:1.25;}
+.sec-head .sec-why{font-size:13px;color:var(--ink-soft);margin-top:4px;font-weight:400;}
+p{margin:0 0 14px;}
+h3{margin:20px 0 12px;font-size:18px;}
+
+/* BOXES */
+.def-box{background:var(--blue-bg);border-right:4px solid var(--blue);border-radius:0 8px 8px 0;padding:16px 20px;margin:14px 0;font-size:15px;}
+.def-box .def-term{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:var(--blue);letter-spacing:1px;display:block;margin-bottom:4px;}
+.def-box-purple{background:var(--purple-bg);border-right:4px solid var(--purple);border-radius:0 8px 8px 0;padding:16px 20px;margin:14px 0;font-size:15px;}
+.def-box-purple .def-term{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:var(--purple);letter-spacing:1px;display:block;margin-bottom:4px;}
+.callout{background:var(--gold-bg);border:1.5px solid var(--gold);border-radius:10px;padding:18px 22px;margin:18px 0;font-size:15px;}
+.callout .c-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700;text-transform:uppercase;display:block;margin-bottom:6px;}
+.warn{background:var(--red-bg);border-right:4px solid var(--red);border-radius:0 8px 8px 0;padding:14px 18px;margin:18px 0;font-size:15px;}
+.warn .w-tag{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--red);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:4px;}
+.tip{background:var(--green-bg);border-right:4px solid var(--green);border-radius:0 8px 8px 0;padding:14px 18px;margin:18px 0;font-size:15px;}
+.tip .t-tag{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--green);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:4px;}
+
+/* PATH */
+.path{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:13px;background:#fff;border:1px solid var(--rule);border-radius:6px;padding:7px 14px;margin:6px 0 12px;direction:ltr;flex-wrap:wrap;}
+.path .arr{color:var(--gold);font-weight:700;}
+.key{display:inline-block;font-family:'JetBrains Mono',monospace;background:var(--ink);color:var(--cream);font-size:12px;font-weight:700;padding:3px 10px;border-radius:5px;margin:0 2px;direction:ltr;white-space:nowrap;}
+
+/* GRIDS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0;}
+@media(max-width:680px){.grid-2,.grid-3{grid-template-columns:1fr;}.progress-strip{flex-direction:column;}.ps-item{border-left:none;border-top:1px solid var(--rule);}}
+.card{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:18px 20px;}
+.card .c-icon{font-size:24px;margin-bottom:8px;display:block;}
+.card h3{margin:0 0 8px;font-size:16px;font-weight:700;}
+.card p{margin:0;color:var(--ink-mid);font-size:14px;}
+
+/* WRAP DIAGRAM */
+.wrap-diagram{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0;}
+.wrap-box{border:1.5px solid var(--rule);border-radius:8px;background:#fff;padding:14px;text-align:center;}
+.wrap-box .wb-img{width:60px;height:60px;background:var(--blue-bg);border:2px solid var(--blue);border-radius:6px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.wrap-box .wb-lines{margin-top:8px;}
+.wrap-box .wb-line{height:5px;background:var(--rule);border-radius:2px;margin-bottom:4px;}
+.wrap-box .wb-line.side{width:60%;margin-right:auto;}
+.wrap-box .wrap-name{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--blue);margin-bottom:4px;}
+.wrap-box .wrap-desc{font-size:12px;color:var(--ink-soft);}
+.wrap-box.active-wrap{border-color:var(--gold);background:var(--gold-bg);}
+.wrap-box.active-wrap .wb-img{border-color:var(--gold);background:var(--gold-bg);}
+.wrap-box.active-wrap .wrap-name{color:var(--gold);}
+@media(max-width:600px){.wrap-diagram{grid-template-columns:1fr 1fr;}}
+
+/* SMARTART DIAGRAM */
+.smartart-demo{margin:20px auto;max-width:520px;}
+.sa-hierarchy{display:flex;flex-direction:column;align-items:center;gap:0;}
+.sa-node-top{background:var(--ink);color:#fff;padding:10px 28px;border-radius:6px;font-weight:700;font-size:14px;text-align:center;}
+.sa-connector{width:2px;height:20px;background:var(--gold);margin:0 auto;}
+.sa-row{display:flex;gap:12px;justify-content:center;}
+.sa-node{background:var(--blue-bg);border:2px solid var(--blue);padding:8px 14px;border-radius:6px;font-size:13px;font-weight:600;color:var(--blue);text-align:center;}
+.sa-node.green{background:var(--green-bg);border-color:var(--green);color:var(--green);}
+.sa-node.red{background:var(--red-bg);border-color:var(--red);color:var(--red);}
+.sa-sub-row{display:flex;gap:8px;justify-content:center;margin-top:8px;}
+.sa-sub{background:#fff;border:1.5px solid var(--rule);padding:5px 10px;border-radius:4px;font-size:11px;color:var(--ink-mid);text-align:center;}
+
+/* COVER PAGE MOCK */
+.cover-page-mock{max-width:280px;margin:0 auto;border:2px solid var(--ink);border-radius:4px;background:#fff;padding:24px 20px;box-shadow:8px 8px 0 var(--cream-dark);text-align:center;}
+.cp-univ{font-size:10px;font-weight:700;color:var(--ink-soft);margin-bottom:4px;}
+.cp-faculty{font-size:9px;color:var(--ink-soft);margin-bottom:16px;}
+.cp-logo{width:50px;height:50px;background:var(--blue-bg);border:2px solid var(--blue);border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.cp-title{font-size:13px;font-weight:900;color:var(--blue);margin-bottom:16px;line-height:1.4;}
+.cp-divider{height:2px;background:var(--gold);margin:12px 0;}
+.cp-student{font-size:9px;color:var(--ink-mid);text-align:right;line-height:1.8;}
+.cp-year{font-size:9px;color:var(--ink-soft);margin-top:12px;}
+
+/* TABLE */
+.sc-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;}
+.sc-table th{text-align:right;padding:10px 12px;border-bottom:2px solid var(--ink);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft);}
+.sc-table td{padding:11px 12px;border-bottom:1px solid var(--rule);vertical-align:top;}
+.sc-table tr:hover td{background:var(--cream-dark);}
+.sc-law{font-size:12px;color:var(--blue);background:var(--blue-bg);border-radius:4px;padding:2px 8px;display:inline-block;margin-top:3px;}
+
+/* GLOSSARY */
+dl.glossary{margin:0;}
+dl.glossary>div{display:grid;grid-template-columns:200px 1fr;gap:14px;padding:14px 6px;border-bottom:1px solid var(--rule);align-items:start;}
+@media(max-width:600px){dl.glossary>div{grid-template-columns:1fr;gap:2px;}}
+dl.glossary dt{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--blue);direction:ltr;text-align:left;}
+dl.glossary dd{margin:0;font-size:15px;}
+
+/* EXAMPLE */
+.example{border:1.5px solid var(--rule);border-radius:10px;overflow:hidden;margin:20px 0;}
+.example .ex-head{background:var(--ink);color:var(--gold-light);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 18px;}
+.example .ex-body{background:#fff;padding:20px 22px;font-size:15px;}
+.example .ex-body h4{margin:0 0 10px;font-size:15px;color:var(--ink-mid);}
+
+/* DRILL */
+.drill{background:var(--ink);color:var(--cream);border-radius:10px;padding:22px 24px;margin:22px 0;}
+.drill .drill-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-light);margin-bottom:10px;display:block;}
+.drill h4{margin:0 0 10px;color:#fff;font-size:16px;}
+.drill ol{margin:0;padding-right:20px;font-size:14.5px;color:rgba(248,244,237,0.85);}
+.drill li{margin-bottom:7px;}
+.drill .drill-time{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold-light);}
+
+/* COMPARE */
+.compare{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin:18px 0;}
+@media(max-width:620px){.compare{grid-template-columns:1fr;}}
+.compare>div{padding:20px;}
+.compare .bad{background:var(--red-bg);}
+.compare .good{background:var(--green-bg);border-right:1px solid var(--rule);}
+.compare h4{margin:0 0 10px;font-size:14px;font-weight:700;}
+.compare ul{margin:0;padding-right:18px;font-size:14px;color:var(--ink-mid);}
+.compare li{margin-bottom:7px;}
+
+/* CHECKLIST */
+.checklist{list-style:none;margin:0;padding:0;display:grid;gap:10px;}
+.checklist li{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid var(--rule);border-radius:8px;padding:12px 16px;font-size:15px;}
+.check-box{width:20px;height:20px;border:2px solid var(--green);border-radius:4px;flex-shrink:0;margin-top:3px;}
+
+/* Q GRID */
+.q-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0;}
+@media(max-width:620px){.q-grid{grid-template-columns:1fr;}}
+.q-card{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:18px 20px;}
+.q-card h3{margin:0 0 12px;font-size:15px;font-weight:700;}
+.q-card ol{margin:0;padding-right:20px;font-size:14px;color:var(--ink-mid);}
+.q-card li{margin-bottom:8px;}
+
+/* RECAP */
+.recap{border:2px dashed var(--green);border-radius:10px;background:var(--green-bg);padding:20px 24px;margin-bottom:48px;}
+.recap .r-tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--green);font-weight:700;text-transform:uppercase;display:block;margin-bottom:8px;}
+
+footer{text-align:center;padding:24px;border-top:1px solid var(--rule);margin-top:60px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--ink-soft);text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ══ COVER ══ -->
+<header class="cover">
+  <div class="meta">Sunshine T Academy · Word Skills · كليات الحقوق · المحاضرة الرابعة</div>
+  <h1>الصور والمخططات<br>في البحوث القانونية</h1>
+  <p class="sub">إدراج الصور — التفاف النص — SmartArt — صفحة الغلاف الاحترافية — قائمة الأشكال التلقائية</p>
+  <div class="cover-pills">
+    <span class="pill">المدة: ساعة ونص</span>
+    <span class="pill">المستوى: متوسط-متقدم</span>
+    <span class="pill">Word 365</span>
+    <span class="pill">المحاضرة ٤ / ١٠</span>
+  </div>
+</header>
+
+<!-- ══ PROGRESS ══ -->
+<div class="progress-strip">
+  <div class="ps-item done"><span class="ps-num">١</span>الأساسيات ✓</div>
+  <div class="ps-item done"><span class="ps-num">٢</span>البحوث ✓</div>
+  <div class="ps-item done"><span class="ps-num">٣</span>الجداول ✓</div>
+  <div class="ps-item active"><span class="ps-num">٤</span>الصور</div>
+  <div class="ps-item"><span class="ps-num">٥</span>الأدوات</div>
+  <div class="ps-item"><span class="ps-num">٦</span>المراسلات</div>
+  <div class="ps-item"><span class="ps-num">٧</span>العقود</div>
+  <div class="ps-item"><span class="ps-num">٨</span>التعاون</div>
+  <div class="ps-item"><span class="ps-num">٩</span>الطباعة</div>
+  <div class="ps-item"><span class="ps-num">١٠</span>المشروع</div>
+</div>
+
+<!-- ══ RECAP ══ -->
+<div class="recap">
+  <span class="r-tag">⚡ مراجعة سريعة من المحاضرة الثالثة — ٥ دقايق</span>
+  <p style="margin-bottom:6px">سؤالان تطبيقيان قبل البدء:</p>
+  <ul style="margin:0 0 10px;padding-right:20px;font-size:15px;">
+    <li>افتحي ملف الواجب — هل الجداول فيها Header Row + Banded Rows + Caption صحيح؟</li>
+    <li>كيف تجعلين صف العنوان يتكرر في كل صفحة عند جدول طويل؟</li>
+  </ul>
+  <div class="tip" style="margin:0">
+    <span class="t-tag">الربط بالمحاضرة دي</span>
+    المحاضرة دي هتكملي شكل البحث — بعد الهيكل والجداول، جاء دور الصور والمخططات والغلاف. بعد النهارده بحثك هيبدو وثيقة جامعية حقيقية.
+  </div>
+</div>
+
+<!-- ══ 01. WHY IMAGES IN LAW ══ -->
+<section>
+  <div class="sec-head">
+    <div class="sec-num">01</div>
+    <div>
+      <h2>لماذا الصور والمخططات في البحوث القانونية؟</h2>
+      <div class="sec-why">تأسيس الدافع — ٥ دقايق</div>
+    </div>
+  </div>
+
+  <p>قد يبدو الأمر غريباً في البداية — البحث القانوني مش مكانه الصور! لكن الحقيقة هي أن البحث الحقوقي المتقدم يستخدم الصور والمخططات لأغراض محددة جداً وضرورية.</p>
+
+  <div class="callout">
+    <span class="c-tag">متى تُستخدم الصور والمخططات في الحقوق</span>
+    شجرة هيكل المحكمة (هرم التقاضي) — مخطط مراحل التقاضي — صورة شعار الجامعة في الغلاف — مخطط علاقة الأطراف في العقد — صورة وثيقة تاريخية — مخطط SmartArt لعلاقة القوانين ببعضها.
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <span class="c-icon">🏛️</span>
+      <h3>هيكل الجهاز القضائي</h3>
+      <p>SmartArt هرمي يوضح المحاكم من الابتدائية لمحكمة النقض — أوضح من أي شرح نصي.</p>
+    </div>
+    <div class="card">
+      <span class="c-icon">🔄</span>
+      <h3>مراحل التقاضي</h3>
+      <p>مخطط تسلسلي (Process) يوضح رحلة القضية من رفعها للحكم النهائي.</p>
+    </div>
+    <div class="card">
+      <span class="c-icon">🎓</span>
+      <h3>صفحة الغلاف</h3>
+      <p>شعار الجامعة والكلية يُضفي على البحث طابعاً أكاديمياً رسمياً.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 02. INSERT IMAGE ══ -->
+<section>
+  <div class="sec-head">
+    <div class="sec-num">02</div>
+    <div>
+      <h2>إدراج الصور (Insert Pictures)</h2>
+      <div class="sec-why">نظري + عملي — ١٢ دقيقة</div>
+    </div>
+  </div>
+
+  <h3>أ. مصادر الصور في Word</h3>
+  <div class="grid-3">
+    <div class="card">
+      <span class="c-icon">💻</span>
+      <h3>This Device</h3>
+      <p>إدراج صورة من جهازك. الأشيع — لشعارات الجامعة، صور الوثائق التاريخية.</p>
+    </div>
+    <div class="card">
+      <span class="c-icon">🌐</span>
+      <h3>Online Pictures</h3>
+      <p>البحث في الإنترنت مباشرةً من Word. مناسب للصور الحرة الاستخدام فقط.</p>
+    </div>
+    <div class="card">
+      <span class="c-icon">📋</span>
+      <h3>Screenshot</h3>
+      <p>التقاط لقطة شاشة مباشرةً وإدراجها في المستند. مفيد لتوثيق نصوص قانونية.</p>
+    </div>
+  </div>
+
+  <h3>ب. خطوات إدراج صورة من الجهاز</h3>
+  <div class="path">Insert <span class="arr">→</span> Pictures <span class="arr">→</span> This Device</div>
+
+  <table class="sc-table">
+    <thead><tr><th>الخطوة</th><th>الإجراء</th><th>النتيجة</th></tr></thead>
+    <tbody>
+      <tr><td><strong>١</strong></td><td>ضعي المؤشر في المكان المطلوب للصورة</td><td>تحديد موضع الإدراج</td></tr>
+      <tr><td><strong>٢</strong></td><td>Insert → Pictures → This Device</td><td>يفتح مستعرض الملفات</td></tr>
+      <tr><td><strong>٣</strong></td><td>تصفّحي للصورة المطلوبة واختاريها</td><td>—</td></tr>
+      <tr><td><strong>٤</strong></td><td>اضغطي Insert</td><td>الصورة تظهر في المستند</td></tr>
+      <tr><td><strong>٥</strong></td><td>تظهر أدوات Picture Format تلقائياً في الـ Ribbon</td><td>جاهزة للتعديل</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn">
+    <span class="w-tag">أكثر غلطة في إدراج الصور</span>
+    الصورة تدرج بالحجم الكامل وتهرّب نص المستند. الحل دائماً: ضبط الحجم + ضبط Text Wrapping فور الإدراج — قبل أي خطوة أخرى.
+  </div>
+
+  <h3>ج. ضبط حجم الصورة بدقة</h3>
+  <div class="path">Picture Format <span class="arr">→</span> Size (الحجم والارتفاع)</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>سحب المقابض (Handles)</h3>
+      <p>النقاط الزرقاء على حواف الصورة — اسحبي الزوايا فقط (مش الجوانب) للحفاظ على النسب.</p>
+    </div>
+    <div class="card">
+      <h3>✅ Lock Aspect Ratio</h3>
+      <p>في Picture Format → Size → Lock Aspect Ratio يمنع تشويه الصورة عند تغيير الحجم.</p>
+    </div>
+    <div class="card">
+      <h3>قياس مخصص</h3>
+      <p>Picture Format → Size: أدخلي الارتفاع أو العرض بالسنتيمتر مباشرةً للدقة المطلقة.</p>
+    </div>
+    <div class="card">
+      <h3>Reset Picture</h3>
+      <p>لو الصورة اتشوّهت — Picture Format → Reset Picture يرجّعها لحجمها الأصلي.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 03. TEXT WRAPPING ══ -->
+<section>
+  <div class="sec-head">
+    <div class="sec-num">03</div>
+    <div>
+      <h2>التفاف النص حول الصور (Text Wrapping)</h2>
+      <div class="sec-why">الأهم في إدارة الصور — ١٥ دقيقة</div>
+    </div>
+  </div>
+
+  <p>Text Wrapping هو الأمر الذي يتحكم في <strong>علاقة الصورة بالنص</strong> من حولها. فهمه الصح بيوفّر عليكِ ساعات من تنسيق الصفحة.</p>
+
+  <div class="def-box">
+    <span class="def-term">Text Wrapping (التفاف النص)</span>
+    يحدد كيف يتصرف النص المحيط بالصورة — هل يتجنبها؟ يلتف حولها؟ يمر فوقها؟ كل خيار له استخدام مختلف.
+  </div>
+
+  <div class="path">Picture Format <span class="arr">→</span> Wrap Text <span class="arr">→</span> اختاري النوع</div>
+  <p>أو: يمين الماوس على الصورة → Wrap Text</p>
+
+  <!-- Wrapping options visual -->
+  <div class="wrap-diagram">
+    <div class="wrap-box">
+      <div class="wb-img">📄</div>
+      <div class="wrap-name">In Line with Text</div>
+      <div class="wb-lines">
+        <div class="wb-line"></div>
+        <div class="wb-line short" style="width:40%;margin:0 auto;background:var(--blue-bg);border:1px solid var(--blue);height:20px;border-radius:3px;"></div>
+        <div class="wb-line"></div>
+        <div class="wb-line" style="width:80%"></div>
+      </div>
+      <div class="wrap-desc">الصورة كأنها حرف في السطر. النص فوقها وتحتها فقط.</div>
+    </div>
+    <div class="wrap-box active-wrap">
+      <div class="wb-img">🔄</div>
+      <div class="wrap-name">Square ✅</div>
+      <div class="wb-lines" style="display:grid;grid-template-columns:1fr auto 1fr;gap:4px;align-items:center">
+        <div><div class="wb-line"></div><div class="wb-line"></div><div class="wb-line short"></div></div>
+        <div style="width:30px;height:40px;background:var(--gold-bg);border:1.5px solid var(--gold);border-radius:3px;"></div>
+        <div><div class="wb-line"></div><div class="wb-line"></div></div>
+      </div>
+      <div class="wrap-desc">النص يلتف حول الصورة من الجانبين. الأنسب للبحوث.</div>
+    </div>
+    <div class="wrap-box">
+      <div class="wb-img">🎯</div>
+      <div class="wrap-name">Tight</div>
+      <div class="wb-lines" style="display:grid;grid-template-columns:1fr auto 1fr;gap:4px;align-items:center">
+        <div><div class="wb-line"></div><div class="wb-line short"></div><div class="wb-line"></div></div>
+        <div style="width:28px;height:44px;background:var(--purple-bg);border:1.5px solid var(--purple);border-radius:50%;"></div>
+        <div><div class="wb-line short" style="width:50%"></div><div class="wb-line"></div></div>
+      </div>
+      <div class="wrap-desc">النص يلتف على شكل الصورة الفعلي وليس المستطيل.</div>
+    </div>
+    <div class="wrap-box">
+      <div class="wb-img">⬆️</div>
+      <div class="wrap-name">Top and Bottom</div>
+      <div class="wb-lines">
+        <div class="wb-line"></div>
+        <div style="height:24px;background:var(--green-bg);border:1px solid var(--green);border-radius:3px;margin-bottom:4px;"></div>
+        <div class="wb-line"></div>
+        <div class="wb-line short"></div>
+      </div>
+      <div class="wrap-desc">النص فوق الصورة وتحتها فقط — الصورة تأخذ سطراً كاملاً.</div>
+    </div>
+    <div class="wrap-box">
+      <div class="wb-img">🔀</div>
+      <div class="wrap-name">Behind Text</div>
+      <div class="wb-lines" style="position:relative">
+        <div class="wb-line" style="position:relative;z-index:2"></div>
+        <div class="wb-line" style="position:relative;z-index:2"></div>
+        <div style="position:absolute;top:0;left:10px;right:10px;height:28px;background:rgba(26,58,107,0.12);border-radius:3px;"></div>
+        <div class="wb-line short" style="position:relative;z-index:2"></div>
+      </div>
+      <div class="wrap-desc">الصورة خلف النص كخلفية. مفيد للعلامة المائية.</div>
+    </div>
+    <div class="wrap-box">
+      <div class="wb-img">📌</div>
+      <div class="wrap-name">In Front of Text</div>
+      <div class="wb-lines" style="position:relative">
+        <div class="wb-line" style="opacity:0.3"></div>
+        <div class="wb-line" style="opacity:0.3"></div>
+        <div style="position:absolute;top:-2px;left:10px;right:10px;height:32px;background:var(--red-bg);border:1px solid var(--red);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--red);">فوق النص</div>
+        <div class="wb-line short" style="opacity:0.3"></div>
+      </div>
+      <div class="wrap-desc">الصورة فوق النص تغطيه. نادر الاستخدام في البحوث.</div>
+    </div>
+  </div>
+
+  <div class="tip">
+    <span class="t-tag">القاعدة الذهبية للبحوث القانونية</span>
+    استخدمي <strong>Square</strong> أو <strong>Top and Bottom</strong> دائماً. Square لما تريدين الصورة جانبية مع النص. Top and Bottom لما تريدين الصورة تأخذ صف كامل وسط الصفحة.
+  </div>
+
+  <!-- Example 1 -->
+  <div class="example">
+    <div class="ex-head">📋 مثال ١ — إدراج شعار الجامعة في صفحة الغلاف</div>
+    <div class="ex-body">
+      <h4>السيناريو: بحث "المسؤولية المدنية للطبيب" — تريدين إضافة شعار الجامعة في الغلاف</h4>
+      <ol>
+        <li>ضعي المؤشر في أعلى صفحة الغلاف</li>
+        <li>Insert → Pictures → This Device ← اختاري ملف الشعار (PNG أو JPG)</li>
+        <li>فور الإدراج: Picture Format → Wrap Text → <strong>Top and Bottom</strong></li>
+        <li>اضبطي الحجم: Picture Format → Size → Width: 3 سم (مناسب للشعار)</li>
+        <li>توسيطي الصورة: Picture Format → Align → Align Center</li>
+        <li>أضيفي Caption أسفل الشعار: Insert Caption → Label: Figure</li>
+      </ol>
+      <div class="tip" style="margin-top:12px;margin-bottom:0">
+        <span class="t-tag">نتيجة</span>
+        شعار الجامعة مُوسَّط، حجمه مضبوط، ولا يتداخل مع أي نص في الصفحة.
+      </div>
+    </div>
+  </div>
+
+  <!-- Drill 1 -->
+  <div class="drill">
+    <span class="drill-tag">تدريب ١ — إدراج صورة وضبط التفاف النص</span>
+    <h4>افتحي ملف بحث واحد من المحاضرات السابقة وطبّقي:</h4>
+    <ol>
+      <li>أدرجي أي صورة من جهازك (شعار، صورة شخصية، أي صورة متاحة)</li>
+      <li>غيّري Text Wrapping إلى Square وراقبي كيف يلتف النص</li>
+      <li>غيّريه إلى Top and Bottom وراقبي الفرق</li>
+      <li>اضبطي حجمها لعرض 5 سم بـ Lock Aspect Ratio مفعّل</li>
+      <li>حرّكي الصورة لمنتصف الصفحة باستخدام Align Center</li>
+      <li>أضيفي Caption لها: "شكل رقم ١: ..."</li>
+    </ol>
+    <div class="drill-time">⏱ الوقت المتوقع: 8 دقايق</div>
+  </div>
+</section>
+
+<!-- ══ 04. PICTURE FORMAT ══ -->
+<section>
+  <div class="sec-head">
+    <div class="sec-num">04</div>
+    <div>
+      <h2>تنسيق الصور — Picture Format</h2>
+      <div class="sec-why">نظري + عملي — ١٠ دقايق</div>
+    </div>
+  </div>
+
+  <p>تبويب Picture Format يظهر تلقائياً عند النقر على أي صورة. يحتوي على كل أدوات التحكم في مظهر الصورة.</p>
+
+  <div class="grid-2">
+    <div>
+      <div class="def-box">
+        <span class="def-term">Picture Styles</span>
+        أطر وأشكال جاهزة للصورة — مستطيل بإطار، دائرة، ظل، انعكاس. اختاري ما يناسب البحث الرسمي (إطار بسيط فقط).
+      </div>
+      <div class="def-box">
+        <span class="def-term">Corrections (التصحيحات)</span>
+        ضبط السطوع والتباين والحدة. مفيد لو الصورة المدرجة تبدو باهتة أو مضيئة أكثر من اللازم.
+      </div>
+      <div class="def-box">
+        <span class="def-term">Color (اللون)</span>
+        تحويل الصورة لرمادي (Grayscale) — مهم جداً للطباعة الأبيض والأسود حتى تبدو احترافية.
+      </div>
+    </div>
+    <div>
+      <div class="def-box">
+        <span class="def-term">Crop (القص)</span>
+        قص جزء من الصورة — تُبقي الجزء المهم فقط. الاختصار: Picture Format → Crop.
+      </div>
+      <div class="def-box">
+        <span class="def-term">Alt Text (النص البديل)</span>
+        وصف نصي للصورة لأغراض الوصولية (Accessibility). مطلوب في بعض الجامعات.
+      </div>
+      <div class="def-box">
+        <span class="def-term">Compress Pictures</span>
+        ضغط الصور لتقليل حجم الملف — مهم جداً لو البحث فيه صور كثيرة وحجم الملف كبير.
+      </div>
+    </div>
+  </div>
+
+  <h3>الأدوات الأهم في الـ Align (المحاذاة)</h3>
+  <div class="path">Picture Format <span class="arr">→</span> Arrange <span class="arr">→</span> Align</div>
+
+  <div class="grid-3">
+    <div class="card">
+      <h3>Align Center</h3>
+      <p>توسيط الصورة أفقياً في وسط الصفحة. الأكثر استخداماً في البحوث.</p>
+    </div>
+    <div class="card">
+      <h3>Align Left / Right</h3>
+      <p>محاذاة الصورة لليسار أو اليمين. مع Square Wrapping يجعل النص يلتف من الجهة الأخرى.</p>
+    </div>
+    <div class="card">
+      <h3>Align Middle (عمودي)</h3>
+      <p>توسيط الصورة عمودياً في الصفحة. نادر الاستخدام في البحوث.</p>
+    </div>
+  </div>
+
+  <!-- Example 2 -->
+  <div class="example">
+    <div class="ex-head">📋 مثال ٢ — صورة وثيقة تاريخية في بحث القانون الدستوري</div>
+    <div class="ex-body">
+      <h4>السيناريو: بحث في "تطور الدساتير المصرية" — تريدين إدراج صورة وثيقة دستور ١٩٢٣</h4>
+      <ol>
+        <li>Insert → Pictures → This Device ← صورة الوثيقة</li>
+        <li>Wrap Text → <strong>Square</strong> → اسحبي الصورة لليسار</li>
+        <li>الحجم: عرض 7 سم (مناسب للوثائق)</li>
+        <li>Picture Format → Color → <strong>Grayscale</strong> (للطباعة الأبيض والأسود)</li>
+        <li>Picture Format → Picture Styles → اختاري إطار بسيط (Simple Frame)</li>
+        <li>Insert Caption → "شكل ١: صورة من دستور ١٩٢٣"</li>
+        <li>الآن النص يلتف على يمين الصورة بشكل احترافي</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 05. SMARTART ══ -->
+<section>
+  <div class="sec-head">
+    <div class="sec-num">05</div>
+    <div>
+      <h2>SmartArt — المخططات التلقائية الاحترافية</h2>
+      <div class="sec-why">الأقوى في المحاضرة — ٢٠ دقيقة</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="c-tag">ما هو SmartArt</span>
+    SmartArt هو نظام إنشاء مخططات احترافية داخل Word بضغطات قليلة — هرم، تسلسل، دوائر، علاقات، مصفوفات. بدله بتحتاجي برامج تصميم متخصصة.
+  </div>
+
+  <div class="path">Insert <span class="arr">→</span> SmartArt <span class="arr">→</span> اختاري النوع</div>
+
+  <h3>أ. أنواع SmartArt المفيدة في الحقوق</h3>
+  <table class="sc-table">
+    <thead><tr><th>النوع</th><th>الفئة</th><th>الاستخدام في الحقوق</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Hierarchy (هرمي)</strong></td><td>Hierarchy</td><td>هيكل الجهاز القضائي — التسلسل الهرمي للمحاكم</td></tr>
+      <tr><td><strong>Process (تسلسلي)</strong></td><td>Process</td><td>مراحل التقاضي — إجراءات رفع الدعوى</td></tr>
+      <tr><td><strong>Cycle (دائري)</strong></td><td>Cycle</td>
+      <td>دورة القانون (تشريع → تطبيق → تفسير)</td></tr>
+      <tr><td><strong>Relationship (علاقات)</strong></td><td>Relationship</td><td>علاقة أطراف العقد ببعضها</td></tr>
+      <tr><td><strong>List (قائمة)</strong></td><td>List</td><td>عرض أركان الجريمة أو شروط العقد بشكل جذاب</td></tr>
+      <tr><td><strong>Matrix (مصفوفة)</strong></td><td>Matrix</td><td>تصنيف الجرائم أو العقوبات في محاور</td></tr>
+    </tbody>
+  </table>
+
+  <h3>ب. رسم توضيحي: هيكل الجهاز القضائي المصري بـ SmartArt</h3>
+  <div class="smartart-demo">
+    <div class="sa-hierarchy">
+      <div class="sa-node-top">محكمة النقض</div>
+      <div class="sa-connector"></div>
+      <div class="sa-row">
+        <div class="sa-node">محاكم الاستئناف</div>
+      </div>
+      <div class="sa-connector"></div>
+      <div class="sa-row">
+        <div class="sa-node green">المحاكم الابتدائية</div>
+        <div class="sa-node green">المحاكم الجزئية</div>
+      </div>
+      <div class="sa-connector"></div>
+      <div class="sa-sub-row">
+        <div class="sa-sub">دائرة مدنية</div>
+        <div class="sa-sub">دائرة جنائية</div>
+        <div class="sa-sub">دائرة تجارية</div>
+        <div class="sa-sub">دائرة أحوال شخصية</div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;margin-top:10px">هذا المخطط يمكن إنشاؤه في Word بـ SmartArt → Hierarchy في أقل من 3 دقائق</p>
+  </div>
+
+  <h3>ج. كيفية إنشاء SmartArt خطوة بخطوة</h3>
+  <table class="sc-table">
+    <thead><tr><th>الخطوة</th><th>الإجراء</th><th>النتيجة</th></tr></thead>
+    <tbody>
+      <tr><td><strong>١</strong></td><td>Insert → SmartArt</td><td>يفتح مربع حوار اختيار النوع</td></tr>
+      <tr><td><strong>٢</strong></td><td>اختاري الفئة من القائمة اليمنى (Hierarchy, Process...)</td><td>تظهر الأشكال المتاحة</td></tr>
+      <tr><td><strong>٣</strong></td><td>اختاري الشكل المناسب واضغطي OK</td><td>يُدرج المخطط في المستند</td></tr>
+      <tr><td><strong>٤</strong></td><td>اكتبي في Text Pane (الجزء النصي على اليسار)</td><td>النص يظهر تلقائياً في المخطط</td></tr>
+      <tr><td><strong>٥</strong></td><td>SmartArt Design → Add Shape لإضافة عناصر جديدة</td><td>يُضيف مستطيلاً/دائرة جديدة</td></tr>
+      <tr><td><strong>٦</strong></td><td>SmartArt Design → Change Colors لتغيير الألوان</td><td>ألوان احترافية بضغطة واحدة</td></tr>
+      <tr><td><strong>٧</strong></td><td>SmartArt Design → Layouts لتغيير شكل المخطط</td><td>تجربة أشكال مختلفة بدون إعادة إنشاء</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="t-tag">سر SmartArt للبحوث الحقوقية</span>
+    بعد إنشاء المخطط، حوّليه لصورة ثابتة قبل التسليم: انقري على المخطط → يمين الماوس → Save as Picture. هذا يضمن أن المخطط يظهر بنفس الشكل على أي جهاز.
+  </div>
+
+  <!-- Example 3 -->
+  <div class="example">
+    <div class="ex-head">📋 مثال ٣ — مخطط مراحل رفع الدعوى المدنية</div>
+    <div class="ex-body">
+      <h4>السيناريو: بحث في "إجراءات التقاضي في المواد المدنية" — تريدين مخطط Process</h4>
+      <ol>
+        <li>Insert → SmartArt → Process → Basic Chevron Process → OK</li>
+        <li>في Text Pane اكتبي (كل سطر = خطوة):<br>
+          • رفع صحيفة الدعوى<br>
+          • قيد الدعوى وتحديد جلسة<br>
+          • إعلان المدعى عليه<br>
+          • المرافعة وتقديم المذكرات<br>
+          • صدور الحكم</li>
+        <li>SmartArt Design → Change Colors → Colorful Range</li>
+        <li>SmartArt Design → Layouts → جرّبي Upward Arrow Process</li>
+        <li>اضبطي الحجم: Picture Format → Size → Width: 14 سم</li>
+        <li>Insert Caption → "شكل ٢: مراحل رفع الدعوى المدنية"</li>
+      </ol>
+      <div class="tip" style="margin-top:12px;margin-bottom:0">
+        <span class="t-tag">نتيجة</span>
+        مخطط احترافي بـ 5 مراحل مرقمة، ملوّن، ومُعنوَن — لا يختلف عن مخططات الكتب الأكاديمية.
+      </div>
+    </div>
+  </div>
+
+  <!-- Drill 2 -->
+  <div class="drill">
+    <span class="drill-tag">تدريب ٢ — SmartArt لهيكل قانوني</span>
+    <h4>أنشئي مخطط SmartArt لأحد الخيارين:</h4>
+    <ol>
+      <li>خيار أ: هيكل محاكم مصر (Hierarchy) — 3 مستويات على الأقل</li>
+      <li>خيار ب: مراحل إبرام العقد (Process) — 4 مراحل: إيجاب → قبول → توافق الإرادتين → إبرام العقد</li>
+      <li>غيّري الألوان: SmartArt Design → Change Colors</li>
+      <li>جرّبي تغيير الشكل: SmartArt Design → Layouts (اختاري شكلاً مختلفاً)</li>
+      <li>أضيفي Caption: "شكل رقم ..."</li>
+      <li>احفظي المخطط كصورة مستقلة: يمين → Save as Picture</li>
+    </ol>
+    <div class="drill-time">⏱ الوقت المتوقع: 10 دقايق</div>
+  </div>
+</section>
+
+<!-- ══ 06. COVER PAGE ══ -->
+<section>
+  <div class="sec-head">
+    <div class="sec-num">06</div>
+    <div>
+      <h2>صفحة الغلاف الاحترافية</h2>
+      <div class="sec-why">التطبيق الأهم في المحاضرة — ١٥ دقيقة</div>
+    </div>
+  </div>
+
+  <p>صفحة الغلاف هي أول ما يراه الأستاذ. غلاف محترف = انطباع أول إيجابي قبل قراءة كلمة واحدة من البحث.</p>
+
+  <h3>أ. استخدام Cover Page الجاهزة</h3>
+  <div class="path">Insert <span class="arr">→</span> Cover Page <span class="arr">→</span> اختاري التصميم</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>✅ الميزة</h3>
+      <p>تصاميم جاهزة احترافية بألوان وخطوط متناسقة. تملئين بيانات البحث في الأماكن المخصصة فقط.</p>
+    </div>
+    <div class="card">
+      <h3>⚠️ العيب</h3>
+      <p>قد لا تتناسب مع متطلبات الكلية (خطوط إنجليزية، ألوان زاهية). راجعي دائماً متطلبات الكلية أولاً.</p>
+    </div>
+  </div>
+
+  <h3>ب. بناء صفحة الغلاف يدوياً (الأفضل للكليات)</h3>
+  <p>معظم كليات الحقوق لها متطلبات محددة للغلاف. الأفضل بناؤه يدوياً لضمان الامتثال.</p>
+
+  <!-- Cover mock -->
+  <div style="margin:20px 0">
+    <div class="cover-page-mock">
+      <div class="cp-univ">جامعة القاهرة</div>
+      <div class="cp-faculty">كلية الحقوق — قسم القانون المدني</div>
+      <div class="cp-logo">🎓</div>
+      <div class="cp-divider"></div>
+      <div class="cp-title">المسؤولية التقصيرية<br>في القانون المدني المصري</div>
+      <div class="cp-divider"></div>
+      <div class="cp-student">
+        إعداد الطالبة: نورا محمد أحمد<br>
+        رقم الجلوس: ٢٠٢٤/١٢٣٤<br>
+        تحت إشراف: أ.د. محمد السيد
+      </div>
+      <div class="cp-year">العام الجامعي ٢٠٢٤ / ٢٠٢٥</div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;margin-top:8px">نموذج غلاف مكتمل</p>
+  </div>
+
+  <h3>ج. عناصر الغلاف القياسي لكليات الحقوق</h3>
+  <table class="sc-table">
+    <thead><tr><th>العنصر</th><th>التنسيق المطلوب</th><th>الموضع</th></tr></thead>
+    <tbody>
+      <tr><td>اسم الجامعة</td><td>Bold — حجم 14</td><td>أعلى الصفحة — توسيط</td></tr>
+      <tr><td>اسم الكلية والقسم</td><td>Bold — حجم 13</td><td>أسفل اسم الجامعة</td></tr>
+      <tr><td>شعار الجامعة</td><td>صورة — عرض 3 سم — Grayscale</td><td>تحت اسم الكلية</td></tr>
+      <tr><td>عنوان البحث</td><td>Bold — حجم 18-20 — توسيط</td><td>وسط الصفحة</td></tr>
+      <tr><td>اسم الطالب ورقم الجلوس</td><td>حجم 12 — يمين</td><td>أسفل العنوان</td></tr>
+      <tr><td>اسم المشرف</td><td>حجم 12 — يمين</td><td>أسفل اسم الطالب</td></tr>
+      <tr><td>العام الجامعي</td><td>حجم 12 — توسيط</td><td>أسفل الصفحة</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Drill 3 -->
+  <div class="drill">
+    <span class="drill-tag">تدريب ٣ — صفحة غلاف كاملة احترافية</span>
+    <h4>المطلوب: بناء غلاف بحث "الوصية في القانون المصري" من الصفر</h4>
+    <ol>
+      <li>افتحي مستند جديد — إعداد الصفحة: A4، هوامش 2.5 سم، Portrait</li>
+      <li>اكتبي اسم الجامعة والكلية — Bold، حجم 14، توسيط</li>
+      <li>أدرجي شعار الجامعة (أو أي صورة بديلة): Insert → Pictures → This Device</li>
+      <li>اضبطي الشعار: Wrap Text → Top and Bottom | الحجم: 3 سم | Align Center | Color → Grayscale</li>
+      <li>اتركي مسافة وأكتبي عنوان البحث — Bold، حجم 18، توسيط، لون أزرق داكن</li>
+      <li>أضيفي خطاً فاصلاً: Insert → Horizontal Line (أو مستطيل بلا ملء)</li>
+      <li>اكتبي بيانات الطالب والمشرف — حجم 12، محاذاة يمين</li>
+      <li>اكتبي العام الجامعي في الأسفل — توسيط</li>
+      <li>تأكدي أن صفحة الغلاف بـ Ctrl+Enter مفصولة عن باقي البحث</li>
+      <li>احفظي: <span class="key">Ctrl + S</span> باسم "غلاف_الوصية_اسمك"</li>
+    </ol>
+    <div class="drill-time">⏱ الوقت المتوقع: 12 دقيقة</div>
+  </div>
+</section>
+
+<!-- ══ 07. FIGURE CAPTION & LIST ══ -->
+<section>
+  <div class="sec-head">
+    <div class="sec-num">07</div>
+    <div>
+      <h2>Caption الصور وقائمة الأشكال التلقائية</h2>
+      <div class="sec-why">الاحتراف الحقيقي — ٨ دقايق</div>
+    </div>
+  </div>
+
+  <h3>أ. إضافة Caption لكل صورة أو مخطط</h3>
+  <div class="path">يمين الماوس على الصورة <span class="arr">→</span> Insert Caption <span class="arr">→</span> Label: Figure</div>
+  <p>أو: <span class="path">References <span class="arr">→</span> Insert Caption</span></p>
+
+  <div class="def-box">
+    <span class="def-term">Figure Caption (تسمية الشكل)</span>
+    نص توضيحي تحت الصورة أو المخطط يظهر بصيغة: "شكل ١: عنوان الشكل". يُرقّم تلقائياً ويُستخدم لبناء قائمة الأشكال التلقائية.
+  </div>
+
+  <h3>ب. إدراج قائمة الأشكال التلقائية</h3>
+  <p>بعد إضافة Caption لكل الصور، يمكن إنشاء قائمة بها تلقائياً (مثل الفهرس تماماً):</p>
+  <div class="path">References <span class="arr">→</span> Insert Table of Figures</div>
+
+  <div class="callout">
+    <span class="c-tag">متى تكون قائمة الأشكال مطلوبة</span>
+    في الرسائل العلمية والبحوث الطويلة التي تحتوي أكثر من 5 صور أو مخططات. بعض الأساتذة يطلبونها بشكل إلزامي بعد فهرس المحتويات مباشرةً.
+  </div>
+
+  <div class="compare">
+    <div class="good">
+      <h4>✅ الطريقة الصحيحة</h4>
+      <ul>
+        <li>كل صورة فيها Caption (Figure 1, Figure 2...)</li>
+        <li>قائمة الأشكال تُنشأ تلقائياً من الـ Captions</li>
+        <li>لو أضفتِ صورة جديدة — F9 يحدّث القائمة</li>
+        <li>الترقيم تلقائي لا يتغير بالخطأ</li>
+      </ul>
+    </div>
+    <div class="bad">
+      <h4>❌ الطريقة الخاطئة</h4>
+      <ul>
+        <li>كتابة "صورة ١:" يدوياً تحت كل صورة</li>
+        <li>قائمة الأشكال مكتوبة يدوياً</li>
+        <li>لو أضفتِ صورة جديدة — كل الأرقام تتخبط</li>
+        <li>أخطاء في الترقيم شائعة جداً</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 08. SHORTCUTS ══ -->
+<section>
+  <div class="sec-head">
+    <div class="sec-num">08</div>
+    <div>
+      <h2>الاختصارات الكاملة للمحاضرة</h2>
+      <div class="sec-why">جدول مرجعي شامل</div>
+    </div>
+  </div>
+
+  <table class="sc-table">
+    <thead><tr><th>الاختصار</th><th>الوظيفة</th><th>الاستخدام في الحقوق</th></tr></thead>
+    <tbody>
+      <tr><td><span class="key">Alt + F10</span></td><td>فتح / إغلاق جزء التحديد (Selection Pane)</td><td><span class="sc-law">إدارة عدة صور في نفس الصفحة</span></td></tr>
+      <tr><td><span class="key">Ctrl + Shift + G</span></td><td>تجميع كائنات (Group)</td><td><span class="sc-law">تجميع SmartArt وعنوانه في وحدة واحدة</span></td></tr>
+      <tr><td><span class="key">F4</span></td><td>تكرار آخر إجراء</td><td><span class="sc-law">تطبيق نفس حجم الصورة على صور أخرى</span></td></tr>
+      <tr><td><span class="key">Ctrl + Z</span></td><td>تراجع</td><td><span class="sc-law">التراجع عن تغيير حجم الصورة</span></td></tr>
+      <tr><td><span class="key">Shift + سحب</span></td><td>تغيير الحجم مع الحفاظ على النسبة</td><td><span class="sc-law">ضبط شعار الجامعة بدون تشويه</span></td></tr>
+      <tr><td><span class="key">Ctrl + G</span></td><td>الانتقال إلى (Go To) صورة معينة</td><td><span class="sc-law">الانتقال لصورة محددة في بحث طويل</span></td></tr>
+      <tr><td><span class="key">F9</span></td><td>تحديث قوائم الأشكال والفهارس</td><td><span class="sc-law">بعد إضافة صور جديدة</span></td></tr>
+      <tr><td><span class="key">Tab</span> (داخل SmartArt)</td><td>الانتقال للعنصر التالي في المخطط</td><td><span class="sc-law">إدخال النص في خطوات المخطط</span></td></tr>
+      <tr><td><span class="key">Delete</span> على الصورة</td><td>حذف الصورة</td><td><span class="sc-law">حذف صورة غير مطلوبة</span></td></tr>
+      <tr><td><span class="key">Ctrl + C / V</span></td><td>نسخ ولصق الصورة</td><td><span class="sc-law">تكرار الشعار في عدة أماكن</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:28px">الرموز في Picture Format</h3>
+  <div class="grid-3">
+    <div class="card">
+      <h3>🖼 Picture Format</h3>
+      <p>تبويب يظهر عند النقر على صورة — الرمز على شكل لوحة رسم.</p>
+    </div>
+    <div class="card">
+      <h3>✂️ Crop</h3>
+      <p>أداة القص — مقابضها سوداء مثل زوايا الإطار.</p>
+    </div>
+    <div class="card">
+      <h3>🔗 SmartArt Design</h3>
+      <p>تبويب يظهر عند النقر على SmartArt — يحتوي Add Shape وChange Colors.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 09. GLOSSARY ══ -->
+<section>
+  <div class="sec-head">
+    <div class="sec-num">09</div>
+    <div>
+      <h2>قاموس مصطلحات المحاضرة</h2>
+      <div class="sec-why">مرجع سريع للمراجعة</div>
+    </div>
+  </div>
+  <dl class="glossary">
+    <div><dt>Text Wrapping</dt><dd>التفاف النص — يحدد كيف يتصرف النص المحيط بالصورة. الأهم: Square للالتفاف الجانبي، Top and Bottom للصورة المستقلة.</dd></div>
+    <div><dt>Picture Format</dt><dd>تبويب يظهر عند النقر على أي صورة. يحتوي أدوات الحجم، المحاذاة، التنسيق، والاقتصاص.</dd></div>
+    <div><dt>Crop</dt><dd>أداة القص — تزيل أجزاء من حواف الصورة للإبقاء على الجزء المطلوب فقط.</dd></div>
+    <div><dt>Lock Aspect Ratio</dt><dd>قفل نسبة الأبعاد — يمنع تشويه الصورة عند تغيير الحجم بالاحتفاظ بنسبة الطول للعرض.</dd></div>
+    <div><dt>Grayscale</dt><dd>تحويل الصورة لدرجات الرمادي (أبيض وأسود). ضروري للطباعة الأبيض والأسود.</dd></div>
+    <div><dt>SmartArt</dt><dd>نظام رسوميات تلقائي في Word لإنشاء مخططات احترافية: هرمية، تسلسلية، دائرية، وغيرها.</dd></div>
+    <div><dt>Hierarchy</dt><dd>فئة SmartArt للمخططات الهرمية. مثالية لتمثيل هيكل الجهاز القضائي أو التنظيمي.</dd></div>
+    <div><dt>Process</dt><dd>فئة SmartArt للمخططات التسلسلية. مثالية لمراحل التقاضي أو إجراءات إبرام العقد.</dd></div>
+    <div><dt>Figure Caption</dt><dd>تسمية تلقائية للصورة أو المخطط (شكل ١، شكل ٢...). أساس قائمة الأشكال التلقائية.</dd></div>
+    <div><dt>Table of Figures</dt><dd>قائمة الأشكال التلقائية — تُنشأ من الـ Captions تماماً كالفهرس من الـ Headings.</dd></div>
+    <div><dt>Compress Pictures</dt><dd>ضغط الصور لتقليل حجم ملف Word مع الحفاظ على جودة معقولة.</dd></div>
+    <div><dt>Align</dt><dd>محاذاة الصورة: يمين، وسط، يسار، أعلى، أسفل — من Picture Format → Arrange → Align.</dd></div>
+    <div><dt>Cover Page</dt><dd>صفحة الغلاف — الصفحة الأولى من البحث التي تحتوي بيانات الجامعة والطالب والعنوان.</dd></div>
+  </dl>
+</section>
+
+<!-- ══ 10. HOMEWORK ══ -->
+<section>
+  <div class="sec-head">
+    <div class="sec-num">10</div>
+    <div>
+      <h2>الواجب البيتي والمراجعة الذاتية</h2>
+      <div class="sec-why">سلّميه في المحاضرة القادمة</div>
+    </div>
+  </div>
+
+  <h3 style="margin:0 0 14px">الواجب: إضافة الصور والمخططات والغلاف لبحث سابق</h3>
+  <ul class="checklist">
+    <li><div class="check-box"></div>
+      <div><strong>صفحة الغلاف:</strong> غلاف كامل لبحث "عقد البيع في القانون المدني" — فيه شعار الجامعة (Grayscale، 3 سم)، العنوان (Bold حجم 18)، بيانات الطالب، العام الجامعي — كلها بتوسيط وتنسيق صحيح.</div>
+    </li>
+    <li><div class="check-box"></div>
+      <div><strong>مخطط SmartArt:</strong> مخطط Hierarchy لهيكل المحاكم المدنية في مصر — 3 مستويات — ألوان محترمة — Caption: "شكل ١: هيكل المحاكم المدنية المصرية".</div>
+    </li>
+    <li><div class="check-box"></div>
+      <div><strong>مخطط Process:</strong> مخطط SmartArt Process لمراحل إبرام عقد البيع — 4 مراحل على الأقل — Caption: "شكل ٢: مراحل إبرام عقد البيع".</div>
+    </li>
+    <li><div class="check-box"></div>
+      <div><strong>صورة مع التفاف:</strong> أدرجي أي صورة توضيحية في متن البحث بـ Square Wrapping، حجم 6 سم، محاذاة يمين، Caption مناسب.</div>
+    </li>
+    <li><div class="check-box"></div>
+      <div><strong>قائمة الأشكال:</strong> أنشئي قائمة الأشكال التلقائية بعد فهرس المحتويات: References → Insert Table of Figures.</div>
+    </li>
+    <li><div class="check-box"></div>
+      <div><strong>تحديث الفهارس:</strong> حدّثي فهرس المحتويات وقائمة الأشكال معاً بـ F9 وتأكدي من صحة الأرقام.</div>
+    </li>
+  </ul>
+
+  <h3 style="margin:28px 0 14px">أسئلة المراجعة الذاتية</h3>
+  <div class="q-grid">
+    <div class="q-card">
+      <h3>🤔 نظرية</h3>
+      <ol>
+        <li>ما الفرق بين Square و Top and Bottom في Text Wrapping؟</li>
+        <li>لماذا نحوّل الصور إلى Grayscale في البحوث؟</li>
+        <li>ما هو SmartArt وما فئاته المفيدة في الحقوق؟</li>
+        <li>لماذا نضيف Caption لكل صورة ومخطط؟</li>
+        <li>ما الفرق بين Table of Contents و Table of Figures؟</li>
+        <li>لماذا نستخدم Lock Aspect Ratio عند ضبط حجم الصورة؟</li>
+      </ol>
+    </div>
+    <div class="q-card">
+      <h3>⌨️ عملية</h3>
+      <ol>
+        <li>كيف أُدرج صورة من جهازي؟</li>
+        <li>كيف أغيّر Text Wrapping لصورة موجودة؟</li>
+        <li>كيف أُنشئ مخطط SmartArt هرمي؟</li>
+        <li>كيف أُضيف عنصراً جديداً لـ SmartArt موجود؟</li>
+        <li>كيف أُنشئ قائمة الأشكال التلقائية؟</li>
+        <li>كيف أضغط حجم الملف إذا كان به صور كثيرة؟</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:28px">
+    <span class="c-tag">ما الذي سنتعلمه في المحاضرة الخامسة</span>
+    أدوات Word الذكية — Find & Replace المتقدم، Track Changes والتعليقات، التدقيق الإملائي والنحوي، وإعداد المستند للمراجعة المشتركة مع الزملاء والمشرف.
+  </div>
+</section>
+
+<footer>
+  SUNSHINE T ACADEMY — WORD SKILLS — LAW FACULTY — LECTURE 04 / 10 — REVIEW SHEET
+</footer>
+
+</div>
+</body>
+</html>
